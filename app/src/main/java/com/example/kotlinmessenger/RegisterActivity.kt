@@ -95,8 +95,8 @@ class RegisterActivity : AppCompatActivity() {
                     saveUserToFirebaseDatabase(it.toString())
                 }
             }
-            .addOnFailureListener {
-                //do some logging here
+            .addOnFailureListener{
+                Log.d("RegisterActivity", "Failed to upload image to storage: ${it.message}")
             }
     }
 
@@ -107,8 +107,17 @@ class RegisterActivity : AppCompatActivity() {
         ref.setValue(user)
             .addOnSuccessListener {
                 Log.d("RegisterActivity", "Finally we saved the user to Firebase Database")
+                val intent = Intent(this, LatestMessagesActivity::class.java)
+                //clear off all of the previous activities on your stack or your activity stack
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+            .addOnFailureListener{
+                Log.d("RegisterActivity", "Failed to set value to database: ${it.message}")
             }
     }
 }
 
-class User(val uid : String, val username : String, val profileImageUrl : String)
+class User(val uid : String, val username : String, val profileImageUrl : String){
+    constructor() : this("","","")
+}
