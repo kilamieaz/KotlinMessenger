@@ -47,6 +47,7 @@ class NewMessageActivity : AppCompatActivity() {
             override fun onDataChange(p0: DataSnapshot) {
                 val adapter = GroupAdapter<ViewHolder>()
                 p0.children.forEach{
+                    // it = data user
                     Log.d("NewMessage", it.toString())
                     val user = it.getValue(User::class.java)
                     if (user != null) {
@@ -72,7 +73,7 @@ class NewMessageActivity : AppCompatActivity() {
     }
 }
 
-class UserItem(val user: com.example.kotlinmessenger.models.User) : Item<ViewHolder>() {
+class UserItem(val user: User) : Item<ViewHolder>() {
     // edit data satuan
     override fun bind(viewHolder: ViewHolder, position: Int) {
         //will be called in our list for each user object

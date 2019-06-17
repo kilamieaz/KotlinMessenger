@@ -42,6 +42,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    // uri = location of where that image is stored on the device
     var selectedPhotoUri: Uri? = null
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
